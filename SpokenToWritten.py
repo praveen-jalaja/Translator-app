@@ -26,11 +26,8 @@ class spk2wrt:
         text_splits = text.split()
         doc = self.nlp(text.lower())
         matcher = Matcher(self.nlp.vocab)
-        pattern = [
-            {'LOWER': {
-                "REGEX": "(?:single|double|triple|quadruple|quintuple|sextuple|septuple|octuple|nonuple|decuple)"},
-             'POS': 'ADJ'},
-            {'POS': {'NOT_IN': ['VERB', 'AUX', 'ADJ', 'PRON', 'ADV']}}]
+        pattern = [{'LOWER':{"REGEX":"(?:single|double|triple|quadruple|quintuple|sextuple|septuple|octuple|nonuple|decuple)"}}, 
+          {'POS':{'NOT_IN': ['VERB']}}]
         matcher.add("Matching", [pattern])
         matches = matcher(doc)
         doc_2 = self.nlp(text)
