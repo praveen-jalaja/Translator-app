@@ -1,4 +1,3 @@
 streamlit
 word2number
 Pillow==6.2.2
-spacy
