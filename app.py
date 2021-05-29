@@ -1,6 +1,6 @@
 import streamlit as st
 from PIL import Image
-from spoken_to_written import SpokenToWritten
+import SpokenToWritten
 import spacy
 ##from spacy.matcher import Matcher
 ##from spacy.tokens import Span
@@ -70,7 +70,7 @@ st.write("""
 
 ##================================Intiating the object function=======================================
 
-trans = SpokenToWritten()
+trans = SpokenToWritten.spk2wrt()
 
 #========================== text Uploader ===================================
 

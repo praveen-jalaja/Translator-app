@@ -6,7 +6,7 @@ from spacy import displacy
 from word2number import w2n
 
 
-class SpokenToWritten:
+class spk2wrt:
 
     def __init__(self):
         self.nlp = spacy.load("en_core_web_sm")
