@@ -90,7 +90,7 @@ def Multiplier(text):
     matcher = Matcher(nlp.vocab)
     pattern = [{'LOWER':{"REGEX":"(?:single|double|triple)"}, 'POS': 'ADJ'}, 
                 {'POS':{'NOT_IN': ['VERB','AUX','ADJ','PRON','ADV']}}]
-    matcher.add("Matching", None, pattern)
+    matcher.add("Matching", [pattern])
     matches = matcher(doc)
     indicies = []
     doc_2 =nlp(text)
