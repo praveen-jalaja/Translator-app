@@ -2,4 +2,4 @@ streamlit
 word2number
 Pillow==6.2.2
 spacy
-en-core-web-sm==2.3.1
+en_core_web_sm
