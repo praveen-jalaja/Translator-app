@@ -9,3 +9,4 @@ headless = true\n\
 enableCORS=false\n\
 port = $PORT\n\
 " > ~/.streamlit/config.toml
+RUN python -m download en_core_web_sm
