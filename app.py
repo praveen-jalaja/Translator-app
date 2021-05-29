@@ -1,5 +1,6 @@
 import streamlit as st
 from PIL import Image
+from spoken_to_written import SpokenToWritten
 import spacy
 ##from spacy.matcher import Matcher
 ##from spacy.tokens import Span
