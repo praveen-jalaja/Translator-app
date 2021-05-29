@@ -1,4 +1,3 @@
-!python -m spacy download en_core_web_sm
 import streamlit as st
 from PIL import Image
 import spacy
@@ -7,7 +6,6 @@ from spacy.matcher import Matcher
 from spacy.tokens import Span
 from spacy import displacy
 from word2number import w2n
-data_dir = "/streamlit-hatefulmemedection/"
 import webbrowser # inbuilt module
 
 
@@ -87,17 +85,17 @@ tuples_nums  = {
 
 
 
-@st.cache(allow_output_mutation=True)
 def Multiplier(text):
     text_splits =text.split()
-    doc=nlp(text)
+    doc=nlp(text.lower())
     matcher = Matcher(nlp.vocab)
-    pattern = [{'TEXT':{"REGEX":"(?:single|double|triple)"}, 'POS': 'ADJ'}, 
+    pattern = [{'LOWER':{"REGEX":"(?:single|double|triple)"}, 'POS': 'ADJ'}, 
                 {'POS':{'NOT_IN': ['VERB','AUX','ADJ','PRON','ADV']}}]
     matcher.add("Matching", None, pattern)
     matches = matcher(doc)
     indicies = []
-    multiplier_words = [(str(doc[start:end].text), start, end) for id, start, end in matches]
+    doc_2 =nlp(text)
+    multiplier_words = [(str(doc_2[start:end].text), start, end) for id, start, end in matches]
     i = 0
     for words, start,end in multiplier_words:
       indicies.append(start-i)
@@ -115,7 +113,6 @@ def Multiplier(text):
     return ' '.join(text_splits)
 
 
-@st.cache(allow_output_mutation=True)
 def MoneyConvertor(money_ls):
   currency=["dollars", "dollar", "euro", "euros", "yens", "yen", "rupee", "rupees", "pound", "pounds"]
   money=[]
@@ -141,7 +138,6 @@ def MoneyConvertor(money_ls):
   return money
 
 
-@st.cache(allow_output_mutation=True)
 def QunatityConvetor(quan_ls):
     quantity=["pounds","kilograms","grams"]
     quan=[]
@@ -167,7 +163,6 @@ def QunatityConvetor(quan_ls):
 
 
 
-@st.cache(allow_output_mutation=True)
 def QuantityMoneyTranslate(text):
     doc = nlp(text)
 
@@ -224,18 +219,18 @@ submit = st.button("👉🏼 Translate")
 
 
 ##=================prediction================================================#
-def generate_result(prediction):
+def generate_result(translated_text):
 	st.write("""
 	## 🎯 RESULT
 		""")
-	st.write(prediction)
+	st.write(translated_text)
 
 #=========================== Predict Button Clicked ==========================
 if submit:
   	
   # Predicting
   st.write("👁️ Translate...")
-  translated_text = QuantityMoneyTranslate(Multiplier(para))
+  translated_text = QuantityMoneyTranslate(Multiplier(user_input))
   generate_result(translated_text)
 
 #=============================== Copy Right ==============================
