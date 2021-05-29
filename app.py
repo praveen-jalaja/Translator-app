@@ -1,7 +1,6 @@
 import streamlit as st
 from PIL import Image
 import spacy
-import en_core_web_sm
 from spacy.matcher import Matcher
 from spacy.tokens import Span
 from spacy import displacy
